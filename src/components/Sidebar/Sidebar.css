@@ -1,0 +1,134 @@
+.sidebar {
+  width: 60px;
+  height: 100vh;
+  background-color: #2b7fa0; 
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  transition: width 0.3s ease;
+}
+
+.sidebar.expanded {
+  width: 200px;
+}
+
+.sidebar-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.sidebar-icon {
+  background-color: None;
+  font-size: 24px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.sidebar-icon:hover .sidebar-label {
+  opacity: 1;
+  transform: translateX(10px); 
+}
+
+.sidebar-label {
+  margin-left: 15px;
+  font-size: 16px;
+  position: absolute;
+  left: 100%;
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: #ffffff; /* White toggle icon */
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.app-container {
+  display: flex;
+}
+
+.content {
+  margin-left: 60px;
+  padding: 20px;
+  width: calc(100% - 60px);
+  background-color: #f3f4f6;
+  transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.sidebar.expanded + .content {
+  margin-left: 200px;
+  width: calc(100% - 200px);
+}
+
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 100% !important;
+    height: 5vh !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 0;
+    transform: translateY(0);
+    z-index: 100;
+  }
+
+  .sidebar.expanded {
+    width: 100%;
+    height: auto;
+  }
+
+  .sidebar-icons {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .sidebar-icon {
+    margin: 0 10px;
+  }
+
+  .sidebar-label {
+    display: none;
+  }
+
+  .sidebar-toggle {
+    display: none;
+  }
+
+  .content {
+    margin-left: 0;
+    width: 100%;
+    padding-bottom: 70px; /* Add space for the bottom sidebar */
+  }
+
+  .sidebar.expanded + .content {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .sidebar-icon {
+    font-size: 20px;
+  }
+
+  .content {
+    padding: 15px;
+    padding-bottom: 60px;
+  }
+}
