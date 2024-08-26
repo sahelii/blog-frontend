@@ -1,0 +1,99 @@
+
+.comment-form {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.comment-text-area {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 16px;
+  resize: vertical;
+  font-family: 'Poppins', sans-serif;
+}
+
+.comment-text-area:focus {
+  outline: none;
+  border-color: #ef476f;
+  box-shadow: 0 0 0 0.25rem rgba(13, 109, 252, 0.25);
+}
+
+.submit-button {
+  display: block;
+  width: 40% !important; 
+  padding: 8px 16px; 
+  margin: 0 auto; 
+  background-color: #ef476f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s ease-in-out;
+}
+
+.submit-button:hover {
+  background-color: #d43f5f;
+  transform: translateY(-2px);
+}
+
+.submit-button:active {
+  background-color: #bf364f;
+  transform: translateY(1px);
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+  .comment-form {
+    padding: 15px;
+  }
+
+  .comment-text-area {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .submit-button {
+    width: 50%; 
+    padding: 8px 14px; 
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .comment-form {
+    padding: 10px;
+  }
+
+  .comment-text-area {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .submit-button {
+    width: 60%; 
+    font-size: 14px;
+    padding: 8px 12px; 
+  }
+}

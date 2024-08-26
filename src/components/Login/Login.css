@@ -1,4 +1,4 @@
-/* Login and Sign-up Form Styles */
+
 .login-form, .sign-up-form {
     background-color: #ffffff;
     padding: 30px;
@@ -29,19 +29,19 @@
     margin: 10px 0;
     border-radius: 5px;
     border: none;
-    background-color: #ef476f; /* Updated button color to match the theme */
+    background-color: #ef476f; 
     color: #ffffff;
     font-size: 16px;
     cursor: pointer;
   }
   
   .login-form button:hover, .sign-up-form button:hover {
-    background-color: #d43f5f; /* Darker shade for hover */
+    background-color: #d43f5f; 
   }
   
   .switch-button {
     background-color: #001C40;
-    color: white; /* Updated color to match the theme */
+    color: white; 
     border: none;
     cursor: pointer;
     margin-top: 10px;
@@ -49,7 +49,7 @@
   }
   
   .switch-button:hover {
-    color: #d43f5f; /* Darker shade for hover */
+    color: #d43f5f; 
   }
   
 

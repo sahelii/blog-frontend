@@ -1,7 +1,7 @@
 .sidebar {
   width: 60px;
   height: 100vh;
-  background-color: #2b7fa0; 
+  background-color: #98a9c2!important;; 
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -49,7 +49,7 @@
 .sidebar-toggle {
   background: none;
   border: none;
-  color: #ffffff; /* White toggle icon */
+  color: #ffffff;
   font-size: 24px;
   cursor: pointer;
   margin-bottom: 20px;
@@ -113,7 +113,7 @@
   .content {
     margin-left: 0;
     width: 100%;
-    padding-bottom: 70px; /* Add space for the bottom sidebar */
+    padding-bottom: 70px; 
   }
 
   .sidebar.expanded + .content {

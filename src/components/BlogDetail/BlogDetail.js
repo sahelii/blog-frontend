@@ -1,4 +1,3 @@
-// BlogDetail.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -46,10 +45,18 @@ const BlogDetail = () => {
 
   return (
     <div className="blog-detail">
-      {post.image? <img className='blog-image' src={imagefrombuffer({
-          type:post.imageType, // example image/jpeg 
-          data:post.image.data, // array buffer data 
-        })}/>:<div className='blog-image'/>}
+      {post.image ? (
+        <img
+          className="blog-image"
+          src={imagefrombuffer({
+            type: post.imageType,
+            data: post.image.data,
+          })}
+          alt="Blog"
+        />
+      ) : (
+        <div className="blog-image" />
+      )}
       <h1>{post.title}</h1>
       <div className="blog-info">
         <div className="author-info">
@@ -57,13 +64,15 @@ const BlogDetail = () => {
           <span>{post.author ? post.author.name : 'Anonymous'}</span>
         </div>
         <div className="date-info">
-          <span>{post.date ? format(new Date(post.date), 'MMMM dd, yyyy') : 'Invalid Date'}</span>
+          <span>
+            {post.date ? format(new Date(post.date), 'MMMM dd, yyyy') : 'Invalid Date'}
+          </span>
         </div>
       </div>
       <div className="blog-content">
         <p>{post.content}</p>
       </div>
-      
+
       {auth.currentUser && (
         <CommentForm postId={id} onCommentAdded={handleCommentAdded} />
       )}
@@ -74,7 +83,7 @@ const BlogDetail = () => {
           comments.map((comment) => (
             <div key={comment._id} className="comment-card">
               <p>{comment.comment}</p>
-              <small>— {comment.user.email}</small>
+              <small>— {comment.user? comment.user.name : 'Anonymous'}</small>
             </div>
           ))
         ) : (

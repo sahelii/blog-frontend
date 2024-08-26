@@ -52,7 +52,7 @@ const Login = () => {
         const firebase_token = await auth.currentUser.getIdToken();
         saveTokenToLocalStorage(firebase_token);
       }
-      navigate('/');  // Redirect to the BlogList page after successful login/signup
+      navigate('/');  
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         setError('Email already in use. Please log in.');

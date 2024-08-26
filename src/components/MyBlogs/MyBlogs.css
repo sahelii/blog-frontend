@@ -81,7 +81,7 @@ body {
 .my-blog-card-image {
     height: 120px;
     border-bottom: 1px solid #ddd;
-    object-fit: cover; /* Ensures the image covers the container properly */
+    object-fit: cover; 
 }
 
 .loading-message,

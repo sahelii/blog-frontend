@@ -1,127 +1,135 @@
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 /* General container styling */
 .create-blog-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f2f5;
-    padding: 20px;
-  }
-  
-  /* Card styling */
-  .create-blog-card {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px;
-    animation: fadeInUp 0.5s ease forwards;
-    transition: all 0.3s ease;
-  }
-  
-  /* Card hover effect */
-  .create-blog-card:hover {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Header styling */
-  .create-blog-card h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 30px;
-    font-weight: 600;
-    font-size: 28px;
-  }
-  
-  /* Input group styling */
-  .input-group {
-    margin-bottom: 20px;
-    position: relative;
-  }
-  
-  /* Input and Textarea styling */
-  .create-blog-card input,
-  .create-blog-card textarea {
-    width: 100%;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-  }
-  
-  /* Input focus effect */
-  .create-blog-card input:focus,
-  .create-blog-card textarea:focus {
-    border-color: #6c63ff;
-    outline: none;
-    box-shadow: 0 0 10px rgba(108, 99, 255, 0.1);
-  }
-  
-  /* Textarea styling */
-  .create-blog-card textarea {
-    min-height: 150px;
-    resize: none;
-  }
-  
-  /* Submit button styling */
-  .submit-button {
-    width: 100%;
-    padding: 15px;
-    background-color: #6c63ff;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  /* Submit button hover effect */
-  .submit-button:hover {
-    background-color: #5a53d9;
-    transform: translateY(-2px);
-  }
-  
-  /* Error message styling */
-  .error-message {
-    color: #e74c3c;
-    font-size: 14px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  /* Success message styling */
-  .success-message {
-    color: #27ae60;
-    font-size: 14px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  /* Fade in animation */
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
 
-  /* Media Queries for Responsiveness */
+/* Card styling */
+.create-blog-card {
+  background-color: #ffffff; 
+  padding: 50px; 
+  border-radius: 20px; 
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); 
+  width: 100%;
+  max-width: 600px;
+  animation: fadeInUp 0.5s ease forwards;
+  transition: all 0.3s ease;
+}
+
+/* Card hover effect */
+.create-blog-card:hover {
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Header styling */
+.create-blog-card h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 35px;
+  font-weight: 700;
+  font-size: 30px; 
+  letter-spacing: 0.5px;
+}
+
+/* Input group styling */
+.input-group {
+  margin-bottom: 25px; 
+  position: relative;
+}
+
+/* Input and Textarea styling */
+.create-blog-card input,
+.create-blog-card textarea {
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px; 
+  border: 1px solid #ddd; 
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  background-color: #fafafa; 
+}
+
+/* Input focus effect */
+.create-blog-card input:focus,
+.create-blog-card textarea:focus {
+  border-color: #9c88ff; 
+  outline: none;
+  box-shadow: 0 0 10px rgba(156, 136, 255, 0.3); 
+}
+
+/* Textarea styling */
+.create-blog-card textarea {
+  min-height: 150px;
+  resize: none;
+}
+
+/* Submit button styling */
+.submit-button {
+  width: 100%;
+  padding: 15px;
+  background-color: #ef476f; 
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Submit button hover effect */
+.submit-button:hover {
+  background-color: #5a53d9;
+  transform: translateY(-2px);
+}
+
+/* Error message styling */
+.error-message {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Success message styling */
+.success-message {
+  color: #27ae60;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media Queries for Responsiveness */
 @media screen and (max-width: 768px) {
   .create-blog-card {
     padding: 30px;
   }
 
   .create-blog-card h2 {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .create-blog-card input,

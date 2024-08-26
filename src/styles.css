@@ -1,20 +1,20 @@
-/* App Container and Content Styles */
+
 .app-container {
     display: flex;
 }
 
 .content-with-sidebar {
-    margin-left: 70px; /* Adjust based on your sidebar width */
+    margin-left: 70px; 
     padding: 20px;
     width: calc(100% - 70px);
-    background-color: #f3f4f6; /* Light gray background */
+    background-color: #f3f4f6; 
     min-height: 100vh;
 }
 
 .content {
     padding: 20px;
     width: 100%;
-    background-color: #f3f4f6; /* Light gray background */
+    background-color: #f3f4f6; 
     min-height: 100vh;
 }
 
@@ -22,7 +22,7 @@
 .sidebar {
     width: 60px;
     height: 100vh;
-    background-color: #1f2937; /* Dark background color */
+    background-color: #1f2937;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -45,7 +45,7 @@
 }
 
 .sidebar-icon:hover {
-    color: #ef476f; /* Vibrant pink for hover effect */
+    color: #ef476f; 
 }
 
 .sidebar-label {
@@ -63,7 +63,7 @@
     margin-bottom: 20px;
 }
 
-/* Adjusting Content When Sidebar is Expanded */
+
 .sidebar.expanded + .content {
     margin-left: 200px;
     width: calc(100% - 200px);

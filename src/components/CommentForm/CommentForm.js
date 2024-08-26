@@ -35,7 +35,7 @@ const CommentForm = ({ postId, onCommentAdded }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="comment-form" onSubmit={handleSubmit}>
       <textarea
         className="comment-text-area"
         value={comment}
