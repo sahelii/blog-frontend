@@ -250,3 +250,47 @@
 .hide-sidebar .sidebar {
   display: none !important;
 }
+
+.login-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.2em;
+}
+
+.tagline {
+  text-align: center;
+  color: #6c63ff;
+  font-size: 1.08rem;
+  font-weight: 500;
+  margin-bottom: 1.2em;
+  margin-top: -0.7em;
+  letter-spacing: 0.01em;
+  opacity: 0.92;
+}
+
+.animated-bg {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%, #fceabb 100%);
+  background-size: 200% 200%;
+  animation: gradientMove 8s ease-in-out infinite;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

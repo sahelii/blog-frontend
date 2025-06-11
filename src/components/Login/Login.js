@@ -89,11 +89,20 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="login-bg">
+    <div className="login-bg animated-bg">
       <div className="login-container">
         <div className="login-card">
+          <div className="login-logo" style={{marginBottom: '1.2em'}}>
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="48" rx="12" fill="#ef476f"/>
+              <path d="M14 34V14H34V34H14Z" fill="#fff"/>
+              <path d="M24 18V30" stroke="#ef476f" strokeWidth="2.5" strokeLinecap="round"/>
+              <path d="M18 24H30" stroke="#ef476f" strokeWidth="2.5" strokeLinecap="round"/>
+            </svg>
+          </div>
           <h2>{isSignUp ? 'Create Account' : 'Welcome Back'}</h2>
           <p className="subtitle">{isSignUp ? 'Join our community' : 'Sign in to continue'}</p>
+          <p className="tagline">Share your story with the world.</p>
           
           {error && <div className="error-message">{error}</div>}
           
