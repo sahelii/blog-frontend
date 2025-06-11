@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate, useLocation } from 'react-router-dom'; 
 import { login, signUp } from '../../authService';
 import { auth } from "../../firebase";
-import { deleteUser } from 'firebase/auth';
+import { deleteUser, sendPasswordResetEmail } from 'firebase/auth';
 import { endpoint } from '../../config';
 import axios from 'axios';
 import { FaEnvelope, FaLock, FaUser, FaSpinner, FaEye, FaEyeSlash } from 'react-icons/fa';
 import './Login.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -17,7 +19,12 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [showReset, setShowReset] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
+  const [resetLoading, setResetLoading] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
   
   const saveTokenToLocalStorage = (token) => {
     localStorage.setItem('token', token);
@@ -81,12 +88,39 @@ const Login = () => {
     }
   };
 
+  const handlePasswordReset = async (e) => {
+    e.preventDefault();
+    setResetLoading(true);
+    try {
+      await sendPasswordResetEmail(auth, resetEmail);
+      toast.success('Password reset email sent!');
+      setShowReset(false);
+      setResetEmail('');
+    } catch (err) {
+      toast.error('Failed to send reset email.');
+    } finally {
+      setResetLoading(false);
+    }
+  };
+
+  const checkPasswordStrength = (pwd) => {
+    if (!pwd) return '';
+    if (pwd.length < 6) return 'Weak';
+    if (pwd.match(/[A-Z]/) && pwd.match(/[0-9]/) && pwd.length >= 8) return 'Strong';
+    return 'Medium';
+  };
+
   useEffect(() => {
     document.body.classList.add('hide-sidebar');
     return () => {
       document.body.classList.remove('hide-sidebar');
     };
   }, []);
+
+  useEffect(() => {
+    if (location.pathname === '/signup') setIsSignUp(true);
+    else if (location.pathname === '/login') setIsSignUp(false);
+  }, [location.pathname]);
 
   return (
     <div className="login-bg animated-bg">
@@ -138,7 +172,10 @@ const Login = () => {
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (isSignUp) setPasswordStrength(checkPasswordStrength(e.target.value));
+                }}
                 disabled={loading}
                 required
               />
@@ -154,18 +191,27 @@ const Login = () => {
               </button>
             </div>
             
+            {isSignUp && password && (
+              <div className={`password-strength ${passwordStrength.toLowerCase()}`}>{passwordStrength} Password</div>
+            )}
+            
             {!isSignUp && (
-              <div className="remember-me-row">
-                <label className="remember-me-label">
-                  <input
-                    type="checkbox"
-                    checked={rememberMe}
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    disabled={loading}
-                  />
-                  Remember Me
-                </label>
-              </div>
+              <>
+                <div className="remember-me-row">
+                  <label className="remember-me-label">
+                    <input
+                      type="checkbox"
+                      checked={rememberMe}
+                      onChange={(e) => setRememberMe(e.target.checked)}
+                      disabled={loading}
+                    />
+                    Remember Me
+                  </label>
+                </div>
+                <div className="forgot-row">
+                  <button type="button" className="forgot-link" onClick={() => setShowReset(true)} disabled={loading}>Forgot Password?</button>
+                </div>
+              </>
             )}
             
             <button type="submit" className="submit-button" disabled={loading}>
@@ -196,6 +242,26 @@ const Login = () => {
             </p>
           </div>
         </div>
+        {showReset && (
+          <div className="reset-modal">
+            <form onSubmit={handlePasswordReset} className="reset-form">
+              <h4>Reset Password</h4>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={resetEmail}
+                onChange={e => setResetEmail(e.target.value)}
+                required
+                disabled={resetLoading}
+              />
+              <button type="submit" disabled={resetLoading} className="submit-button">
+                {resetLoading ? 'Sending...' : 'Send Reset Email'}
+              </button>
+              <button type="button" className="switch-button" onClick={() => setShowReset(false)} disabled={resetLoading}>Cancel</button>
+            </form>
+          </div>
+        )}
+        <ToastContainer position="top-center" autoClose={2500} />
       </div>
     </div>
   );

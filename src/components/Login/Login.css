@@ -294,3 +294,78 @@
     background-position: 0% 50%;
   }
 }
+
+.forgot-row {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 0.7em;
+}
+.forgot-link {
+  background: none;
+  border: none;
+  color: #6c63ff;
+  font-size: 0.98em;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s;
+  padding: 0;
+}
+.forgot-link:hover:not(:disabled) {
+  color: #ef476f;
+}
+
+.reset-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(60, 60, 80, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+.reset-form {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  padding: 2em 2em 1.5em 2em;
+  min-width: 270px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1em;
+  animation: fadeInUp 0.4s cubic-bezier(.39,.575,.56,1.000) forwards;
+}
+.reset-form h4 {
+  margin: 0 0 0.5em 0;
+  color: #6c63ff;
+  font-size: 1.2em;
+  font-weight: 600;
+  text-align: center;
+}
+.reset-form input[type="email"] {
+  padding: 0.7em 1em;
+  border-radius: 10px;
+  border: 1.5px solid #e0e7ff;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+  box-sizing: border-box;
+}
+
+.password-strength {
+  margin-top: -0.7em;
+  margin-bottom: 0.7em;
+  font-size: 0.98em;
+  font-weight: 500;
+  text-align: left;
+  padding-left: 0.2em;
+}
+.password-strength.weak {
+  color: #e74c3c;
+}
+.password-strength.medium {
+  color: #f39c12;
+}
+.password-strength.strong {
+  color: #27ae60;
+}
