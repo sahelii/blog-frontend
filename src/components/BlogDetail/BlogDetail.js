@@ -1,58 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { usePost } from '../../hooks/usePosts';
+import { useComments } from '../../hooks/useComments';
 import './BlogDetail.css';
-import { endpoint } from '../../config';
 import { FaUserAlt } from 'react-icons/fa';
 import CommentForm from '../CommentForm/CommentForm';
 import { auth } from '../../firebase';
 import { format } from 'date-fns';
-import { imagefrombuffer } from 'imagefrombuffer';
+import { imageFromBuffer } from '../../utils/imageUtils';
+import { BlogListSkeleton } from '../Skeleton/Skeleton';
 
 const BlogDetail = () => {
   const { id } = useParams();
-  const [post, setPost] = useState(null);
-  const [comments, setComments] = useState([]);
+  const { post, loading, error } = usePost(id);
+  const { comments, addComment } = useComments(id);
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const res = await axios.get(`${endpoint}/api/posts/${id}`);
-        setPost(res.data);
-      } catch (error) {
-        console.error("Failed to fetch post:", error);
-      }
-    };
-
-    const fetchComments = async () => {
-      try {
-        const res = await axios.get(`${endpoint}/api/comments/${id}/comment`);
-        setComments(res.data);
-      } catch (error) {
-        console.error("Failed to fetch comments:", error);
-      }
-    };
-
-    fetchPost();
-    fetchComments();
-  }, [id]);
-
-  const handleCommentAdded = (newComment) => {
-    setComments([...comments, newComment]);
+  const handleCommentAdded = async (commentText) => {
+    try {
+      await addComment(commentText);
+    } catch (err) {
+      console.error('Failed to add comment:', err);
+    }
   };
 
-  if (!post) return <div className="loading">Loading...</div>;
+  if (loading) return <BlogListSkeleton count={1} />;
+  if (error) return <div className="error-message">{error}</div>;
+  if (!post) return <div className="loading">Post not found</div>;
+
+  const imageSrc = post.image ? imageFromBuffer(post.image, post.imageType) : null;
 
   return (
     <div className="blog-detail">
-      {post.image ? (
+      {imageSrc ? (
         <img
           className="blog-image"
-          src={imagefrombuffer({
-            type: post.imageType,
-            data: post.image.data,
-          })}
-          alt="Blog"
+          src={imageSrc}
+          alt={post.title}
         />
       ) : (
         <div className="blog-image" />

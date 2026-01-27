@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './MyBlogs.css';
 import { endpoint } from '../../config';
-import { imagefrombuffer } from 'imagefrombuffer';
+import { imageFromBuffer } from '../../utils/imageUtils';
 
 const MyBlogs = () => {
   const [posts, setPosts] = useState([]);
@@ -48,16 +48,19 @@ const MyBlogs = () => {
       <h2 className="blog-list-title">Your Blog Posts</h2>
       <div className="blog-cards-container">
         {posts.length > 0 ? (
-          posts.map(post => (
-            <div key={post._id} className="blog-card">
-              {post.image ? (
-                <img className="blog-card-image" src={imagefrombuffer({
-                  type:post.imageType, // example image/jpeg 
-                  data:post.image.data, // array buffer data 
-                })} />
-              ) : (
-                <div className="blog-card-image"></div>
-              )}
+          posts.map(post => {
+            const imageSrc = post.image ? imageFromBuffer(post.image, post.imageType) : null;
+            return (
+              <div key={post._id} className="blog-card">
+                {imageSrc ? (
+                  <img 
+                    className="blog-card-image" 
+                    src={imageSrc}
+                    alt={post.title}
+                  />
+                ) : (
+                  <div className="blog-card-image"></div>
+                )}
               <div className="blog-card-content">
                 <h3 className="blog-card-title">
                   <Link to={`/posts/${post._id}`}>{post.title}</Link>
@@ -72,7 +75,8 @@ const MyBlogs = () => {
                 </Link>
               </div>
             </div>
-          ))
+            );
+          })
         ) : (
           <p className="no-blogs-message">You haven't created any blogs yet.</p>
         )}
