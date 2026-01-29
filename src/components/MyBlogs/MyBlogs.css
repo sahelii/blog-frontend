@@ -1,160 +1,172 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f3f4f6;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.blog-list {
+  padding: var(--spacing-xl);
+  animation: fadeIn var(--transition-base) ease-out;
 }
 
-.my-blogs {
-    padding: 40px;
-    background-color: #f3f4f6;
-    margin-left: 20px;
+.blog-list-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--spacing-2xl);
+  text-align: center;
+  letter-spacing: -1px;
 }
 
-.my-blogs-title {
-    font-size: 32px;
-    color: #2b2d42;
-    margin-bottom: 30px;
-    text-align: center;
+.blog-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--spacing-xl);
 }
 
-.my-blogs-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    justify-content: start;
+.blog-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  animation: fadeInUp 0.6s ease-out backwards;
 }
 
-.my-blog-card {
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-    opacity: 0;
-    transform: scale(0.95);
-    animation: fadeInUp 0.5s ease forwards;
-    height: 320px; /* Set a fixed height for consistency */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+.blog-card:nth-child(1) { animation-delay: 0.1s; }
+.blog-card:nth-child(2) { animation-delay: 0.2s; }
+.blog-card:nth-child(3) { animation-delay: 0.3s; }
+.blog-card:nth-child(4) { animation-delay: 0.4s; }
+
+.blog-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-2xl);
+  border-color: var(--primary);
 }
 
-.my-blog-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+.blog-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: transform var(--transition-base);
 }
 
-.my-blog-card-title {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #2b2d42;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; /* Prevents wrapping */
+.blog-card:hover .blog-card-image {
+  transform: scale(1.1);
 }
 
-.my-blog-card-title a {
-    color: #2b2d42;
-    text-decoration: none;
+.blog-card-content {
+  padding: var(--spacing-xl);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.my-blog-card-title a:hover {
-    color: #ef476f;
+.blog-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+  line-height: 1.3;
 }
 
-.my-blog-card-content {
-    font-size: 14px;
-    color: #6c757d;
-    margin-bottom: 15px;
-    flex-grow: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.blog-card-title a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
-.my-blog-card-image {
-    height: 120px;
-    border-bottom: 1px solid #ddd;
-    object-fit: cover; 
+.blog-card-title a:hover {
+  color: var(--primary);
+}
+
+.blog-card-excerpt {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.blog-card-read-more {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--text-white);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  align-self: flex-start;
+}
+
+.blog-card-read-more:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
 }
 
 .loading-message,
 .error-message,
 .no-blogs-message {
-    text-align: center;
-    font-size: 18px;
-    color: #ef476f;
+  text-align: center;
+  padding: var(--spacing-2xl);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  font-size: 1.2rem;
+  color: var(--text-secondary);
 }
 
-/* Animations */
+.error-message {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.1);
+}
+
 @keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+  .blog-list {
+    padding: var(--spacing-md);
+  }
 
-/* Media Queries for Responsiveness */
-@media screen and (max-width: 1024px) {
-    .my-blogs-container {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
+  .blog-list-title {
+    font-size: 2rem;
+  }
+
+  .blog-cards-container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .blog-card-image {
+    height: 180px;
+  }
 }
 
-@media screen and (max-width: 768px) {
-    .my-blogs {
-        padding: 30px;
-        margin-left: 10px;
-    }
+@media (max-width: 480px) {
+  .blog-list-title {
+    font-size: 1.75rem;
+  }
 
-    .my-blogs-title {
-        font-size: 28px;
-    }
+  .blog-card-content {
+    padding: var(--spacing-md);
+  }
 
-    .my-blogs-container {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .my-blogs {
-        padding: 20px;
-        margin-left: 0;
-    }
-
-    .my-blogs-title {
-        font-size: 24px;
-    }
-
-    .my-blogs-container {
-        grid-template-columns: 1fr;
-    }
-
-    .my-blog-card {
-        height: auto;
-        min-height: 300px;
-    }
-
-    .my-blog-card-title {
-        font-size: 18px;
-    }
-
-    .my-blog-card-content {
-        font-size: 13px;
-    }
-
-    .my-blog-card-image {
-        height: 100px;
-    }
+  .blog-card-title {
+    font-size: 1.25rem;
+  }
 }

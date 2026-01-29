@@ -1,179 +1,192 @@
-/* Importing Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-/* General container styling */
 .create-blog-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f0f2f5;
-  padding: 20px;
-  font-family: 'Poppins', sans-serif;
+  align-items: flex-start;
+  min-height: calc(100vh - 100px);
+  padding: var(--spacing-2xl);
+  animation: fadeIn var(--transition-base) ease-out;
 }
 
-/* Card styling */
 .create-blog-card {
-  background-color: #ffffff; 
-  padding: 50px; 
-  border-radius: 20px; 
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); 
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-2xl);
   width: 100%;
-  max-width: 600px;
-  animation: fadeInUp 0.5s ease forwards;
-  transition: all 0.3s ease;
+  max-width: 700px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all var(--transition-base);
 }
 
-/* Card hover effect */
 .create-blog-card:hover {
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
-  transform: translateY(-5px);
+  box-shadow: var(--shadow-2xl);
 }
 
-/* Header styling */
 .create-blog-card h2 {
   text-align: center;
-  color: #333;
-  margin-bottom: 35px;
-  font-weight: 700;
-  font-size: 30px; 
-  letter-spacing: 0.5px;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: var(--spacing-2xl);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
 }
 
-/* Input group styling */
 .input-group {
-  margin-bottom: 25px; 
+  margin-bottom: var(--spacing-xl);
   position: relative;
 }
 
-/* Input and Textarea styling */
 .create-blog-card input,
 .create-blog-card textarea {
   width: 100%;
-  padding: 15px;
-  border-radius: 12px; 
-  border: 1px solid #ddd; 
-  font-size: 16px;
-  font-family: 'Poppins', sans-serif;
-  box-sizing: border-box;
-  transition: all 0.3s ease;
-  background-color: #fafafa; 
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 2px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  transition: all var(--transition-fast);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  resize: vertical;
 }
 
-/* Input focus effect */
 .create-blog-card input:focus,
 .create-blog-card textarea:focus {
-  border-color: #9c88ff; 
   outline: none;
-  box-shadow: 0 0 10px rgba(156, 136, 255, 0.3); 
-}
-
-/* Textarea styling */
-.create-blog-card textarea {
-  min-height: 150px;
-  resize: none;
-}
-
-/* Submit button styling */
-.submit-button {
-  width: 100%;
-  padding: 15px;
-  background-color: #ef476f; 
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  font-size: 18px;
-  font-family: 'Poppins', sans-serif;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-/* Submit button hover effect */
-.submit-button:hover {
-  background-color: #5a53d9;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
   transform: translateY(-2px);
 }
 
-/* Error message styling */
+.create-blog-card input::placeholder,
+.create-blog-card textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.create-blog-card textarea {
+  min-height: 200px;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+}
+
+.submit-button {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--text-white);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-md);
+  margin-top: var(--spacing-lg);
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .error-message {
-  color: #e74c3c;
-  font-size: 14px;
-  margin-bottom: 20px;
-  text-align: center;
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--error);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--error);
+  margin-bottom: var(--spacing-lg);
+  font-size: 0.95rem;
+  animation: shake 0.5s ease;
 }
 
-/* Success message styling */
 .success-message {
-  color: #27ae60;
-  font-size: 14px;
-  margin-bottom: 20px;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--success);
+  margin-bottom: var(--spacing-lg);
+  font-size: 0.95rem;
+  animation: fadeIn var(--transition-fast) ease-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+/* Image Uploader Styles */
+.create-blog-card .react-image-upload {
+  margin-bottom: var(--spacing-xl);
+}
+
+.create-blog-card .react-image-upload > div {
+  border: 2px dashed #e2e8f0;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
   text-align: center;
+  transition: all var(--transition-fast);
+  background: rgba(99, 102, 241, 0.02);
 }
 
-/* Fade in animation */
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.create-blog-card .react-image-upload > div:hover {
+  border-color: var(--primary);
+  background: rgba(99, 102, 241, 0.05);
 }
 
-/* Media Queries for Responsiveness */
-@media screen and (max-width: 768px) {
-  .create-blog-card {
-    padding: 30px;
-  }
-
-  .create-blog-card h2 {
-    font-size: 26px;
-  }
-
-  .create-blog-card input,
-  .create-blog-card textarea {
-    font-size: 14px;
-    padding: 12px;
-  }
-
-  .submit-button {
-    font-size: 16px;
-    padding: 12px;
-  }
-}
-
-@media screen and (max-width: 480px) {
+/* Responsive */
+@media (max-width: 768px) {
   .create-blog-container {
-    padding: 10px;
+    padding: var(--spacing-lg);
   }
 
   .create-blog-card {
-    padding: 20px;
-    border-radius: 12px;
+    padding: var(--spacing-xl);
   }
 
   .create-blog-card h2 {
-    font-size: 22px;
-    margin-bottom: 20px;
+    font-size: 2rem;
   }
 
   .create-blog-card input,
   .create-blog-card textarea {
-    font-size: 13px;
-    padding: 10px;
-    border-radius: 8px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-blog-container {
+    padding: var(--spacing-md);
   }
 
-  .submit-button {
-    font-size: 15px;
-    padding: 10px;
-    border-radius: 8px;
+  .create-blog-card {
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-xl);
   }
 
-  .error-message,
-  .success-message {
-    font-size: 13px;
+  .create-blog-card h2 {
+    font-size: 1.75rem;
+  }
+
+  .create-blog-card textarea {
+    min-height: 150px;
   }
 }
