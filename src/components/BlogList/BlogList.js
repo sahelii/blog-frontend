@@ -4,15 +4,16 @@ import { usePosts } from "../../hooks/usePosts";
 import { BlogListSkeleton } from "../Skeleton/Skeleton";
 import { imageFromBuffer } from "../../utils/imageUtils";
 import { calculateReadingTime, formatRelativeTime } from "../../utils/helpers";
-import SearchBar from "../SearchBar/SearchBar";
 import "./BlogList.css";
 import { FaClock, FaTag } from "react-icons/fa";
 
-const BlogList = () => {
+const BlogList = ({ searchTerm: propSearchTerm = '' }) => {
   const [page, setPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState('');
   const { posts, loading, error, pagination } = usePosts(page, 10);
+
+  // Use prop search term if provided, otherwise use local state
+  const searchTerm = propSearchTerm || '';
 
   const handleImageSrc = (post) => {
     if (post.image) {
@@ -92,11 +93,9 @@ const BlogList = () => {
         <p className="blog-list-subtitle">Explore amazing content from our community</p>
       </div>
       
-      {/* Search and Filter Section */}
-      <div className="blog-list-controls">
-        <SearchBar onSearch={setSearchTerm} placeholder="Search stories, authors..." />
-        
-        {allTags.length > 0 && (
+      {/* Tag Filter Section - Only show if there are tags */}
+      {allTags.length > 0 && (
+        <div className="blog-list-controls">
           <div className="tags-filter">
             <button
               className={`tag-filter-btn ${selectedTag === '' ? 'active' : ''}`}
@@ -114,8 +113,8 @@ const BlogList = () => {
               </button>
             ))}
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {filteredPosts.length === 0 ? (
         <div className="no-posts">

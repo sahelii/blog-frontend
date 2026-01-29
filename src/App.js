@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -26,17 +26,19 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+
   return (
     <ErrorBoundary>
       <HelmetProvider>
         <QueryClientProvider client={queryClient}>
           <ToastProvider>
             <Router>
-              <Header/>
+              <Header onSearch={setSearchTerm} />
               <div className="app-container">
                 <div className="content">
                   <Routes>
-                    <Route path="/" element={<BlogList />} />
+                    <Route path="/" element={<BlogList searchTerm={searchTerm} />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Login />} />
                     <Route path="/posts/:id" element={<BlogDetail />} />

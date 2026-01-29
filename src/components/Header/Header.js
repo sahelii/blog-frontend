@@ -1,13 +1,16 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import './Header.css';
-import { FaPen, FaUser, FaSignOutAlt } from 'react-icons/fa';
+import { FaPen, FaUser, FaSignOutAlt, FaSearch } from 'react-icons/fa';
 
-const Header = () => {
+const Header = ({ onSearch }) => {
   const [user] = useAuthState(auth);
   const location = useLocation();
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -21,12 +24,54 @@ const Header = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    if (onSearch) {
+      onSearch(value);
+    }
+  };
+
+  const handleSearchFocus = () => {
+    setIsSearchFocused(true);
+    if (location.pathname !== '/') {
+      navigate('/');
+    }
+  };
+
   return (
     <header className="header">
       <Link to="/" className="logo">
         <span className="logo-icon">✍️</span>
         <span className="logo-text">StoryHub</span>
       </Link>
+      
+      {/* Search Bar - Only show on home page or when focused */}
+      {(location.pathname === '/' || isSearchFocused) && (
+        <div className={`header-search ${isSearchFocused ? 'focused' : ''}`}>
+          <FaSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search stories..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            onFocus={handleSearchFocus}
+            onBlur={() => setIsSearchFocused(false)}
+            className="search-input"
+          />
+          {searchTerm && (
+            <button
+              className="search-clear"
+              onClick={() => {
+                setSearchTerm('');
+                if (onSearch) onSearch('');
+              }}
+            >
+              ×
+            </button>
+          )}
+        </div>
+      )}
       
       <nav className="main-nav">
         <Link 

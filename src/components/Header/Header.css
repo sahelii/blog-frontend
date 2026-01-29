@@ -5,6 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1.5rem;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
   position: sticky;
   top: 0;
@@ -24,6 +25,7 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .logo:hover {
@@ -38,12 +40,76 @@
   letter-spacing: -0.5px;
 }
 
+/* Header Search */
+.header-search {
+  flex: 1;
+  max-width: 500px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border-radius: 2rem;
+  padding: 0.625rem 1.25rem;
+  border: 2px solid #e2e8f0;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.header-search.focused {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header-search .search-icon {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.header-search .search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.95rem;
+  color: #1e293b;
+  font-family: 'Inter', sans-serif;
+}
+
+.header-search .search-input::placeholder {
+  color: #94a3b8;
+}
+
+.header-search .search-clear {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+}
+
+.header-search .search-clear:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #1e293b;
+}
+
 .main-nav {
   display: flex;
   align-items: center;
   gap: 2rem;
-  flex: 1;
-  justify-content: center;
+  flex-shrink: 0;
 }
 
 .nav-link {
@@ -75,6 +141,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-shrink: 0;
 }
 
 .auth-buttons {
@@ -186,21 +253,32 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .header-search {
+    max-width: 300px;
+  }
+}
+
 @media (max-width: 768px) {
   .header {
     padding: 0.75rem 1rem;
     flex-wrap: wrap;
+    gap: 1rem;
   }
 
   .logo {
     font-size: 1.25rem;
   }
 
-  .main-nav {
+  .header-search {
     order: 3;
     width: 100%;
-    justify-content: center;
+    max-width: 100%;
     margin-top: 0.5rem;
+  }
+
+  .main-nav {
+    order: 2;
     gap: 1rem;
   }
 
@@ -231,5 +309,9 @@
 
   .logo-text {
     display: none;
+  }
+
+  .header-search {
+    padding: 0.5rem 1rem;
   }
 }
