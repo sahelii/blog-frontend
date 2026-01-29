@@ -5,7 +5,7 @@
   --primary: #6366f1;
   --primary-dark: #4f46e5;
   --primary-light: #818cf8;
-  --secondary: #ec4899;
+  --secondary: #8b5cf6;
   --accent: #f59e0b;
   
   /* Neutrals */
@@ -16,7 +16,7 @@
   --bg-card-dark: #1e293b;
   
   /* Text Colors */
-  --text-primary: #0f172a;
+  --text-primary: #1e293b;
   --text-secondary: #64748b;
   --text-light: #94a3b8;
   --text-white: #ffffff;
@@ -89,7 +89,7 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {

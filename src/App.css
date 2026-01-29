@@ -1,27 +1,21 @@
 .app-container {
   display: flex;
   min-height: 100vh;
+  flex-direction: column;
 }
 
 .content {
   flex: 1;
-  margin-left: 80px;
-  padding: var(--spacing-xl);
-  transition: margin-left var(--transition-base);
-  min-height: 100vh;
-}
-
-/* Ensure content doesn't overlap with header */
-.content {
-  margin-top: 70px;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  transition: all var(--transition-base);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .content {
-    margin-left: 0;
-    padding: var(--spacing-md);
-    padding-bottom: 90px;
-    margin-top: 60px;
+    padding: 1rem;
   }
 }

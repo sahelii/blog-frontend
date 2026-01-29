@@ -5,8 +5,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import Login from './components/Login/Login';
 import BlogList from './components/BlogList/BlogList';
 import BlogDetail from './components/BlogDetail/BlogDetail';
-import Sidebar from './components/Sidebar/Sidebar';
 import CreateBlog from './components/CreateBlog/CreateBlog';
+import EditPost from './components/EditPost/EditPost';
 import MyBlogs from './components/MyBlogs/MyBlogs'; 
 import Header from './components/Header/Header';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
@@ -34,13 +34,13 @@ function App() {
             <Router>
               <Header/>
               <div className="app-container">
-                <Sidebar />
                 <div className="content">
                   <Routes>
                     <Route path="/" element={<BlogList />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Login />} />
                     <Route path="/posts/:id" element={<BlogDetail />} />
+                    <Route path="/posts/:id/edit" element={<EditPost />} />
                     <Route path="/create" element={<CreateBlog />} />
                     <Route path="/my-blogs" element={<MyBlogs />} />
                   </Routes>
