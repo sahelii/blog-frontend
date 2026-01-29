@@ -14,15 +14,12 @@ const CommentForm = ({ postId, onCommentAdded }) => {
     
     setLoading(true);
     try {
-      const response = await api.post(`/api/comments/${postId}/comment`, {
+      await api.post(`/api/comments/${postId}/comment`, {
         comment: comment.trim()
       });
       
       const commentText = comment.trim();
       setComment('');
-      
-      // Handle both new and old API response formats
-      const newComment = response.data.success ? response.data.data : response.data;
       
       // Call callback with comment text (as expected by BlogDetail's addComment)
       if (onCommentAdded) {

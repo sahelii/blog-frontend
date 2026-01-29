@@ -48,7 +48,7 @@ const Login = () => {
         const firebase_token = await auth.currentUser.getIdToken();
         saveTokenToLocalStorage(firebase_token);
       } else {
-        const login_obj = await login(email, password);
+        await login(email, password);
         const firebase_token = await auth.currentUser.getIdToken();
         saveTokenToLocalStorage(firebase_token);
       }

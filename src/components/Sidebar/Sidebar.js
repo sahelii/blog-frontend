@@ -1,23 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaHome, FaPlus, FaUser, FaBars } from 'react-icons/fa';
 import './Sidebar.css';
-import { auth } from '../../firebase';
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
-  };
-
-  const handleNavigation = (path) => {
-    if (auth.currentUser) {
-      navigate(path);
-    } else {
-      navigate('/login');
-    }
   };
 
   return (

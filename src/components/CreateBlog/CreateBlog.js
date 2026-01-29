@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
@@ -21,7 +20,7 @@ const CreateBlog = () => {
     if(!auth.currentUser){
       navigate("/login")
     }
-  },[])
+  },[navigate])
   
   function getImageFileObject(imageFile) {
     setImage(imageFile);
