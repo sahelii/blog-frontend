@@ -29,7 +29,7 @@ const Login = () => {
         return [true, res.data];
       }
     } catch (err) {
-      console.log(err);
+      console.error('Registration failed:', err);
       return [false, undefined];
     }
   };
