@@ -15,9 +15,9 @@ export const usePosts = (page = 1, limit = 10) => {
         setLoading(true);
         setError(null);
         const response = await api.get('/api/posts', {
-          params: { page, limit }
+          params: { page, limit },
         });
-        
+
         if (response.data.success) {
           setPosts(response.data.data);
           setPagination(response.data.pagination);
@@ -46,14 +46,16 @@ export const usePost = (id) => {
   const { showToast } = useToast();
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) {
+      return;
+    }
 
     const fetchPost = async () => {
       try {
         setLoading(true);
         setError(null);
         const response = await api.get(`/api/posts/${id}`);
-        
+
         if (response.data.success) {
           setPost(response.data.data);
         } else {
@@ -86,7 +88,7 @@ export const useMyPosts = () => {
         setLoading(true);
         setError(null);
         const response = await api.get('/api/posts/my-blogs');
-        
+
         if (response.data.success) {
           setPosts(response.data.data);
         } else {

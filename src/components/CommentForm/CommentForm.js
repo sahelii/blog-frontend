@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
 import { useToast } from '../../context/ToastContext';
-import "./CommentForm.css";
+import './CommentForm.css';
 
 const CommentForm = ({ postId, onCommentAdded }) => {
   const [comment, setComment] = useState('');
@@ -10,22 +10,24 @@ const CommentForm = ({ postId, onCommentAdded }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!comment.trim()) return;
-    
+    if (!comment.trim()) {
+      return;
+    }
+
     setLoading(true);
     try {
       await api.post(`/api/comments/${postId}/comment`, {
-        comment: comment.trim()
+        comment: comment.trim(),
       });
-      
+
       const commentText = comment.trim();
       setComment('');
-      
+
       // Call callback with comment text (as expected by BlogDetail's addComment)
       if (onCommentAdded) {
         await onCommentAdded(commentText);
       }
-      
+
       showToast('Comment added successfully', 'success');
     } catch (err) {
       const errorMessage = err.response?.data?.error || err.message || 'Failed to add comment';

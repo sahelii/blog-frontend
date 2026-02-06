@@ -9,9 +9,9 @@ export const ToastProvider = ({ children }) => {
   const showToast = useCallback((message, type = 'info', duration = 3000) => {
     const id = Date.now() + Math.random();
     const toast = { id, message, type };
-    
+
     setToasts(prev => [...prev, toast]);
-    
+
     setTimeout(() => {
       setToasts(prev => prev.filter(t => t.id !== id));
     }, duration);
@@ -26,8 +26,8 @@ export const ToastProvider = ({ children }) => {
       {children}
       <div className="toast-container">
         {toasts.map(toast => (
-          <div 
-            key={toast.id} 
+          <div
+            key={toast.id}
             className={`toast toast-${toast.type}`}
             onClick={() => removeToast(toast.id)}
           >

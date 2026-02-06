@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import { login, signUp } from '../../authService';
-import { auth } from "../../firebase";
+import { auth } from '../../firebase';
 import { deleteUser } from 'firebase/auth';
 import { endpoint } from '../../config';
 import axios from 'axios';
 import './Login.css';
-
-
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -16,7 +14,7 @@ const Login = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  
+
   const saveTokenToLocalStorage = (token) => {
     localStorage.setItem('token', token);
   };
@@ -52,12 +50,12 @@ const Login = () => {
         const firebase_token = await auth.currentUser.getIdToken();
         saveTokenToLocalStorage(firebase_token);
       }
-      navigate('/');  
+      navigate('/');
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         setError('Email already in use. Please log in.');
       } else {
-        setError('Authentication error: ' + error.message);
+        setError(`Authentication error: ${error.message}`);
       }
     }
   };

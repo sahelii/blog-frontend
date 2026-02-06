@@ -7,7 +7,7 @@ class ErrorBoundary extends React.Component {
     this.state = { hasError: false, error: null, errorInfo: null };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(_error) {
     return { hasError: true };
   }
 
@@ -15,7 +15,7 @@ class ErrorBoundary extends React.Component {
     console.error('Error caught by boundary:', error, errorInfo);
     this.setState({
       error,
-      errorInfo
+      errorInfo,
     });
   }
 
@@ -29,7 +29,7 @@ class ErrorBoundary extends React.Component {
         <div className="error-boundary">
           <div className="error-boundary-content">
             <h2>Oops! Something went wrong</h2>
-            <p>We're sorry, but something unexpected happened.</p>
+            <p>We&apos;re sorry, but something unexpected happened.</p>
             {process.env.NODE_ENV === 'development' && this.state.error && (
               <details className="error-details">
                 <summary>Error Details (Development Only)</summary>

@@ -5,18 +5,20 @@
  * @returns {String|null} - Data URL or image URL, or null if invalid
  */
 export const imageFromBuffer = (imageData, imageType) => {
-  if (!imageData) return null;
-  
+  if (!imageData) {
+    return null;
+  }
+
   // If it's already a URL string (from Cloudinary or external source)
   if (typeof imageData === 'string' && imageData.startsWith('http')) {
     return imageData;
   }
-  
+
   // If it's already a base64 data URL
   if (typeof imageData === 'string' && imageData.startsWith('data:')) {
     return imageData;
   }
-  
+
   // If it's a buffer object with data array (old format from MongoDB)
   if (imageData && typeof imageData === 'object') {
     if (imageData.data && Array.isArray(imageData.data)) {
@@ -31,7 +33,7 @@ export const imageFromBuffer = (imageData, imageType) => {
         return null;
       }
     }
-    
+
     // If it's a Buffer object (Node.js Buffer)
     if (imageData.type === 'Buffer' && Array.isArray(imageData.data)) {
       try {
@@ -45,6 +47,6 @@ export const imageFromBuffer = (imageData, imageType) => {
       }
     }
   }
-  
+
   return null;
 };

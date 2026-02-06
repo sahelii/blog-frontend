@@ -9,14 +9,16 @@ export const useComments = (postId) => {
   const { showToast } = useToast();
 
   useEffect(() => {
-    if (!postId) return;
+    if (!postId) {
+      return;
+    }
 
     const fetchComments = async () => {
       try {
         setLoading(true);
         setError(null);
         const response = await api.get(`/api/comments/${postId}/comment`);
-        
+
         if (response.data.success) {
           setComments(response.data.data);
         } else {
@@ -37,9 +39,9 @@ export const useComments = (postId) => {
   const addComment = async (commentText) => {
     try {
       const response = await api.post(`/api/comments/${postId}/comment`, {
-        comment: commentText
+        comment: commentText,
       });
-      
+
       if (response.data.success) {
         const newComment = response.data.data;
         setComments(prev => [...prev, newComment]);

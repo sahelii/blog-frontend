@@ -4,12 +4,16 @@ import './Skeleton.css';
 const Skeleton = ({ type = 'text', width, height, className = '' }) => {
   const classes = `skeleton skeleton-${type} ${className}`;
   const style = {};
-  
-  if (width) style.width = width;
-  if (height) style.height = height;
+
+  if (width) {
+    style.width = width;
+  }
+  if (height) {
+    style.height = height;
+  }
 
   return (
-    <div 
+    <div
       className={classes}
       style={style}
       aria-label="Loading..."
