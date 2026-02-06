@@ -1,11 +1,11 @@
-import React, { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
-import { usePosts } from "../../hooks/usePosts";
-import { BlogListSkeleton } from "../Skeleton/Skeleton";
-import { imageFromBuffer } from "../../utils/imageUtils";
-import { calculateReadingTime, formatRelativeTime } from "../../utils/helpers";
-import "./BlogList.css";
-import { FaClock, FaTag } from "react-icons/fa";
+import React, { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { usePosts } from '../../hooks/usePosts';
+import { BlogListSkeleton } from '../Skeleton/Skeleton';
+import { imageFromBuffer } from '../../utils/imageUtils';
+import { calculateReadingTime, formatRelativeTime } from '../../utils/helpers';
+import './BlogList.css';
+import { FaClock, FaTag } from 'react-icons/fa';
 
 const BlogList = ({ searchTerm: propSearchTerm = '' }) => {
   const [page, setPage] = useState(1);
@@ -50,13 +50,13 @@ const BlogList = ({ searchTerm: propSearchTerm = '' }) => {
       filtered = filtered.filter(post =>
         post.title?.toLowerCase().includes(searchLower) ||
         post.content?.toLowerCase().includes(searchLower) ||
-        post.author?.name?.toLowerCase().includes(searchLower)
+        post.author?.name?.toLowerCase().includes(searchLower),
       );
     }
 
     if (selectedTag) {
       filtered = filtered.filter(post =>
-        post.tags && post.tags.includes(selectedTag)
+        post.tags && post.tags.includes(selectedTag),
       );
     }
 
@@ -92,7 +92,7 @@ const BlogList = ({ searchTerm: propSearchTerm = '' }) => {
         <h1 className="blog-list-title">Discover Stories</h1>
         <p className="blog-list-subtitle">Explore amazing content from our community</p>
       </div>
-      
+
       {/* Tag Filter Section - Only show if there are tags */}
       {allTags.length > 0 && (
         <div className="blog-list-controls">
@@ -143,9 +143,9 @@ const BlogList = ({ searchTerm: propSearchTerm = '' }) => {
                 <div key={post._id} className="blog-card">
                   {imageSrc ? (
                     <Link to={`/posts/${post._id}`} className="blog-card-image-wrapper">
-                      <img 
-                        className="blog-card-image" 
-                        src={imageSrc} 
+                      <img
+                        className="blog-card-image"
+                        src={imageSrc}
                         alt={post.title}
                         loading="lazy"
                       />
@@ -170,7 +170,7 @@ const BlogList = ({ searchTerm: propSearchTerm = '' }) => {
                     </h3>
                     <p className="blog-card-excerpt">
                       {post.content.length > 200
-                        ? post.content.substring(0, 200) + "..."
+                        ? `${post.content.substring(0, 200)}...`
                         : post.content}
                     </p>
                     <div className="blog-card-footer">

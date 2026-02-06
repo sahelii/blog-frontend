@@ -11,10 +11,16 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## `Deployed link frontend`
-https://blog-frontend-sigma-ecru.vercel.app/
-## `Deployed link backend`
-https://blog-backend-2-5hun.onrender.com
+## Environment setup
+
+1. Copy `.env.example` to `.env` in the project root.
+2. Get your Firebase config from [Firebase Console](https://console.firebase.google.com) → Project settings → General.
+3. Fill in all `REACT_APP_*` values in `.env`. **Never commit `.env` or real API keys to Git.**
+
+## Deployed links
+
+- **Frontend:** https://blog-frontend-sigma-ecru.vercel.app/
+- **Backend:** https://blog-backend-2-5hun.onrender.com
 
 
 The page will reload when you make changes.\

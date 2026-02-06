@@ -12,19 +12,26 @@ export const formatRelativeTime = (date) => {
   const postDate = new Date(date);
   const diffInSeconds = Math.floor((now - postDate) / 1000);
 
-  if (diffInSeconds < 60) return 'Just now';
-  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
-  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
-  if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)}d ago`;
-  
+  if (diffInSeconds < 60) {
+    return 'Just now';
+  }
+  if (diffInSeconds < 3600) {
+    return `${Math.floor(diffInSeconds / 60)}m ago`;
+  }
+  if (diffInSeconds < 86400) {
+    return `${Math.floor(diffInSeconds / 3600)}h ago`;
+  }
+  if (diffInSeconds < 604800) {
+    return `${Math.floor(diffInSeconds / 86400)}d ago`;
+  }
   return postDate.toLocaleDateString();
 };
 
 // Share functionality
 export const sharePost = async (title, url) => {
   const shareData = {
-    title: title,
-    url: url,
+    title,
+    url,
   };
 
   try {
@@ -57,6 +64,8 @@ export const copyToClipboard = async (text) => {
 
 // Truncate text
 export const truncateText = (text, maxLength) => {
-  if (text.length <= maxLength) return text;
-  return text.substring(0, maxLength) + '...';
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return `${text.substring(0, maxLength)}...`;
 };

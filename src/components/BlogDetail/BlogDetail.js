@@ -32,7 +32,9 @@ const BlogDetail = () => {
   };
 
   const handleShare = async () => {
-    if (!post) return;
+    if (!post) {
+      return;
+    }
     const url = window.location.href;
     const result = await sharePost(post.title, url);
     if (result) {
@@ -56,12 +58,18 @@ const BlogDetail = () => {
   };
 
   // Check if current user is the author by comparing emails
-  const isAuthor = post?.author && auth.currentUser && 
+  const isAuthor = post?.author && auth.currentUser &&
     post.author.email?.toLowerCase() === auth.currentUser.email?.toLowerCase();
 
-  if (loading) return <BlogListSkeleton count={1} />;
-  if (error) return <div className="error-message">{error}</div>;
-  if (!post) return <div className="loading">Post not found</div>;
+  if (loading) {
+    return <BlogListSkeleton count={1} />;
+  }
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
+  if (!post) {
+    return <div className="loading">Post not found</div>;
+  }
 
   const imageSrc = post.image ? imageFromBuffer(post.image, post.imageType) : null;
   const readingTime = calculateReadingTime(post.content || '');
@@ -78,7 +86,7 @@ const BlogDetail = () => {
         ) : (
           <div className="blog-image" />
         )}
-        
+
         <div className="blog-header">
           <h1>{post.title}</h1>
           <div className="blog-actions">
@@ -157,7 +165,7 @@ const BlogDetail = () => {
         onConfirm={handleDelete}
         title="Delete Post"
         message="Are you sure you want to delete this post? This action cannot be undone."
-        confirmText={deleting ? "Deleting..." : "Delete"}
+        confirmText={deleting ? 'Deleting...' : 'Delete'}
         cancelText="Cancel"
       />
     </>

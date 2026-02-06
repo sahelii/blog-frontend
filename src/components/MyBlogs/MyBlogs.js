@@ -22,7 +22,7 @@ const MyBlogs = () => {
 
   useEffect(() => {
     if (!auth.currentUser) {
-      navigate("/login");
+      navigate('/login');
     }
   }, [navigate]);
 
@@ -51,8 +51,10 @@ const MyBlogs = () => {
   }, [navigate, showToast]);
 
   const handleDelete = async () => {
-    if (!deleteDialog.postId) return;
-    
+    if (!deleteDialog.postId) {
+      return;
+    }
+
     setDeleting(true);
     try {
       await api.delete(`/api/posts/${deleteDialog.postId}`);
@@ -66,8 +68,12 @@ const MyBlogs = () => {
     }
   };
 
-  if (loading) return <div className="loading-message">Loading your blogs...</div>;
-  if (error) return <div className="error-message">{error}</div>;
+  if (loading) {
+    return <div className="loading-message">Loading your blogs...</div>;
+  }
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
 
   return (
     <>
@@ -81,8 +87,8 @@ const MyBlogs = () => {
               return (
                 <div key={post._id} className="blog-card">
                   {imageSrc ? (
-                    <img 
-                      className="blog-card-image" 
+                    <img
+                      className="blog-card-image"
                       src={imageSrc}
                       alt={post.title}
                     />
@@ -95,7 +101,7 @@ const MyBlogs = () => {
                     </h3>
                     <p className="blog-card-excerpt">
                       {post.content.length > 150
-                        ? post.content.substring(0, 150) + "..."
+                        ? `${post.content.substring(0, 150)}...`
                         : post.content}
                     </p>
                     <div className="blog-card-footer">
@@ -148,7 +154,7 @@ const MyBlogs = () => {
         onConfirm={handleDelete}
         title="Delete Post"
         message="Are you sure you want to delete this post? This action cannot be undone."
-        confirmText={deleting ? "Deleting..." : "Delete"}
+        confirmText={deleting ? 'Deleting...' : 'Delete'}
         cancelText="Cancel"
       />
     </>

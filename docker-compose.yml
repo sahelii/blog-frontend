@@ -1,0 +1,36 @@
+services:
+  # Frontend Application
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: blog-frontend
+    restart: unless-stopped
+    environment:
+      # React environment variables (prefixed with REACT_APP_)
+      REACT_APP_API_URL: ${REACT_APP_API_URL:-http://localhost:5000}
+      # Add other React environment variables as needed
+    ports:
+      - "3000:80"
+    networks:
+      - blog-frontend-network
+    # If backend is running in another container, you can connect to it
+    # by using the backend service name or external network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  blog-frontend-network:
+    driver: bridge
+
+# Optional: If you want to connect to backend running elsewhere
+# Uncomment and configure the external network:
+# networks:
+#   blog-frontend-network:
+#     driver: bridge
+#   blog-backend-network:
+#     external: true
+#     name: blog-backend-network

@@ -30,9 +30,9 @@ const EditPost = () => {
       try {
         const token = await auth.currentUser.getIdToken();
         const response = await axios.get(`${endpoint}/api/posts/${id}`, {
-          headers: { 'x-auth-token': token }
+          headers: { 'x-auth-token': token },
         });
-        
+
         const post = response.data.data || response.data;
         setTitle(post.title || '');
         setContent(post.content || '');
@@ -58,7 +58,7 @@ const EditPost = () => {
       const formData = new FormData();
       formData.append('title', title);
       formData.append('content', content);
-      
+
       const tagsArray = tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
       formData.append('tags', JSON.stringify(tagsArray));
 
@@ -70,8 +70,8 @@ const EditPost = () => {
       await axios.put(`${endpoint}/api/posts/${id}`, formData, {
         headers: {
           'x-auth-token': token,
-          'Content-Type': 'multipart/form-data'
-        }
+          'Content-Type': 'multipart/form-data',
+        },
       });
 
       showToast('Post updated successfully!', 'success');

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { auth } from '../../firebase';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import './CreateBlog.css';
 import { endpoint } from '../../config';
 import ImageUploader from 'react-image-upload';
@@ -21,7 +21,7 @@ const CreateBlog = () => {
 
   useEffect(() => {
     if (!auth.currentUser) {
-      navigate("/login");
+      navigate('/login');
     }
   }, [navigate]);
 
@@ -49,17 +49,17 @@ const CreateBlog = () => {
         },
       };
       const formData = new FormData();
-      formData.append("title", title);
-      formData.append("content", content);
-      
+      formData.append('title', title);
+      formData.append('content', content);
+
       const tagsArray = tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
       if (tagsArray.length > 0) {
-        formData.append("tags", JSON.stringify(tagsArray));
+        formData.append('tags', JSON.stringify(tagsArray));
       }
 
       if (image) {
-        formData.append("fileType", image.file.type);
-        formData.append("image", image.file, image.file.name);
+        formData.append('fileType', image.file.type);
+        formData.append('image', image.file, image.file.name);
       }
 
       await axios.post(`${endpoint}/api/posts`, formData, config);

@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import './Header.css';
-import { FaPen, FaUser, FaSignOutAlt, FaSearch } from 'react-icons/fa';
+import { FaPen, FaSignOutAlt, FaSearch } from 'react-icons/fa';
 
 const Header = ({ onSearch }) => {
   const [user] = useAuthState(auth);
@@ -15,7 +15,7 @@ const Header = ({ onSearch }) => {
   const handleLogout = async () => {
     try {
       await auth.signOut();
-      localStorage.removeItem('token');  
+      localStorage.removeItem('token');
       window.location.href = '/';
     } catch (error) {
       console.error('Logout error:', error);
@@ -45,7 +45,7 @@ const Header = ({ onSearch }) => {
         <span className="logo-icon">✍️</span>
         <span className="logo-text">StoryHub</span>
       </Link>
-      
+
       {/* Search Bar - Only show on home page or when focused */}
       {(location.pathname === '/' || isSearchFocused) && (
         <div className={`header-search ${isSearchFocused ? 'focused' : ''}`}>
@@ -64,7 +64,9 @@ const Header = ({ onSearch }) => {
               className="search-clear"
               onClick={() => {
                 setSearchTerm('');
-                if (onSearch) onSearch('');
+                if (onSearch) {
+                  onSearch('');
+                }
               }}
             >
               ×
@@ -72,24 +74,24 @@ const Header = ({ onSearch }) => {
           )}
         </div>
       )}
-      
+
       <nav className="main-nav">
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className={`nav-link ${isActive('/') ? 'active' : ''}`}
         >
           Discover
         </Link>
         {user && (
           <>
-            <Link 
-              to="/create" 
+            <Link
+              to="/create"
               className={`nav-link ${isActive('/create') ? 'active' : ''}`}
             >
               <FaPen /> Write
             </Link>
-            <Link 
-              to="/my-blogs" 
+            <Link
+              to="/my-blogs"
               className={`nav-link ${isActive('/my-blogs') ? 'active' : ''}`}
             >
               My Stories

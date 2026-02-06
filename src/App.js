@@ -7,7 +7,7 @@ import BlogList from './components/BlogList/BlogList';
 import BlogDetail from './components/BlogDetail/BlogDetail';
 import CreateBlog from './components/CreateBlog/CreateBlog';
 import EditPost from './components/EditPost/EditPost';
-import MyBlogs from './components/MyBlogs/MyBlogs'; 
+import MyBlogs from './components/MyBlogs/MyBlogs';
 import Header from './components/Header/Header';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import { ToastProvider } from './context/ToastContext';
