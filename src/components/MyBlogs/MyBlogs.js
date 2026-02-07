@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { auth } from '../../firebase';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './MyBlogs.css';
-import { endpoint } from '../../config';
 import { imageFromBuffer } from '../../utils/imageUtils';
 import { calculateReadingTime, formatRelativeTime } from '../../utils/helpers';
 import { useToast } from '../../context/ToastContext';
@@ -29,13 +27,7 @@ const MyBlogs = () => {
   useEffect(() => {
     const fetchMyPosts = async () => {
       try {
-        const token = await auth.currentUser.getIdToken();
-        const config = {
-          headers: {
-            'x-auth-token': token,
-          },
-        };
-        const res = await axios.get(`${endpoint}/api/posts/my-blogs`, config);
+        const res = await api.get('/api/posts/my-blogs');
         setPosts(res.data.data || res.data || []);
       } catch (err) {
         setError('Failed to fetch your blogs. Please try again.');
