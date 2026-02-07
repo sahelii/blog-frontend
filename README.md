@@ -1,35 +1,45 @@
-# Getting Started with Create React App
+# StoryHub Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React SPA for the blog platform: posts, comments, auth (Firebase), React Query, React Router.
 
-## Available Scripts
+## Tech stack
 
-In the project directory, you can run:
+- React 18, React Router, React Query
+- Firebase Auth
+- Axios (API client with `x-auth-token`)
 
-### `npm start`
+## Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Copy `.env.example` to `.env`.
+2. Set `REACT_APP_API_URL` (backend URL) and all `REACT_APP_FIREBASE_*` from [Firebase Console](https://console.firebase.google.com). **Never commit `.env`.**
+3. `npm install && npm start` → [http://localhost:3000](http://localhost:3000).
 
-## Environment setup
+## Scripts
 
-1. Copy `.env.example` to `.env` in the project root.
-2. Get your Firebase config from [Firebase Console](https://console.firebase.google.com) → Project settings → General.
-3. Fill in all `REACT_APP_*` values in `.env`. **Never commit `.env` or real API keys to Git.**
+- **`npm start`** – Dev server
+- **`npm test`** – Jest + React Testing Library (use `--watchAll=false` in CI)
+- **`npm run build`** – Production build
+- **`npm run lint`** – ESLint
+
+## Tests
+
+- **BlogList:** loading state and posts list (mocked `usePosts`)
+- **BlogDetail:** content and comments (mocked `usePost`, `useComments`)
+- **Login:** happy path and error state (mocked `authService`)
+
+Run: `npm test -- --watchAll=false`
+
+## CI
+
+- **Workflow:** `.github/workflows/ci.yml` runs on push/PR to `main` and `develop`.
+- **Steps:** `npm ci`, `npm run lint`, `npm test -- --watchAll=false`, `npm run build`.
+
+So: *Every push runs tests and lint; no manual-only testing.*
 
 ## Deployed links
 
 - **Frontend:** https://blog-frontend-sigma-ecru.vercel.app/
 - **Backend:** https://blog-backend-2-5hun.onrender.com
-
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
