@@ -10,13 +10,13 @@ jest.mock('../../authService', () => ({
 jest.mock('../../firebase', () => ({ auth: { currentUser: null } }));
 jest.mock('../../config', () => ({ endpoint: 'http://test.api' }));
 
-const { login, signUp } = require('../../authService');
+const { login } = require('../../authService');
 
 function renderLogin() {
   return render(
     <MemoryRouter>
       <Login />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import './SearchBar.css';
 
-const SearchBar = ({ onSearch, placeholder = "Search posts..." }) => {
+const SearchBar = ({ onSearch, placeholder = 'Search posts...' }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 

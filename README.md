@@ -8,10 +8,15 @@ React SPA for the blog platform: posts, comments, auth (Firebase), React Query, 
 - Firebase Auth
 - Axios (API client with `x-auth-token`)
 
+## Security (never commit)
+
+- **Do not commit:** `.env`, `.env.local`, `.env.vault`, `.env.keys`, or any file with real API keys or secrets. They are in `.gitignore`.
+- Use `.env.example` as a template only; never commit it with real values.
+
 ## Setup
 
 1. Copy `.env.example` to `.env`.
-2. Set `REACT_APP_API_URL` (backend URL) and all `REACT_APP_FIREBASE_*` from [Firebase Console](https://console.firebase.google.com). **Never commit `.env`.**
+2. Set `REACT_APP_API_URL` (backend URL) and all `REACT_APP_FIREBASE_*` from [Firebase Console](https://console.firebase.google.com).
 3. `npm install && npm start` → [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
@@ -40,6 +45,8 @@ So: *Every push runs tests and lint; no manual-only testing.*
 
 - **Frontend:** https://blog-frontend-sigma-ecru.vercel.app/
 - **Backend:** https://blog-backend-2-5hun.onrender.com
+
+**Deployment checklist (Vercel):** In Vercel → Settings → Environment Variables, set `REACT_APP_API_URL` to your backend URL and all `REACT_APP_FIREBASE_*` from Firebase Console. Redeploy after changing env vars. Backend must have your Vercel URL in `CORS_ALLOWED_ORIGINS` (or `FRONTEND_URL`) so API calls succeed.
 
 ### `npm run build`
 

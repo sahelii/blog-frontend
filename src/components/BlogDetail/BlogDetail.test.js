@@ -37,7 +37,7 @@ function renderWithRouter() {
           <Route path="/posts/:id" element={<BlogDetail />} />
         </Routes>
       </MemoryRouter>
-    </ToastProvider>
+    </ToastProvider>,
   );
 }
 
