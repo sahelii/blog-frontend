@@ -1,99 +1,64 @@
-# StoryHub Frontend
+# StoryHub – Frontend
 
-React SPA for the blog platform: posts, comments, auth (Firebase), React Query, React Router.
+Modern React SPA for a blogging platform: discover stories, write posts, and discuss with comments.
 
-## Tech stack
+### Features
 
-- React 18, React Router, React Query
-- Firebase Auth
-- Axios (API client with `x-auth-token`)
+- **Discover stories**: paginated feed with search, tags, reading-time, and relative dates.
+- **Authentication**: Firebase email/password auth with protected routes.
+- **Write & edit**: create, edit, delete posts with cover image upload and tags.
+- **Comments**: authenticated users can comment on posts, with instant UI updates.
+- **Polished UI**: responsive layout, skeleton loaders, toasts, error boundaries.
 
-## Security (never commit)
+### Tech stack
 
-- **Do not commit:** `.env`, `.env.local`, `.env.vault`, `.env.keys`, or any file with real API keys or secrets. They are in `.gitignore`.
-- Use `.env.example` as a template only; never commit it with real values.
+- **React 18** with **React Router 6**
+- **Firebase Auth**
+- **Axios** API client with `x-auth-token` header
+- **date-fns**, **react-icons**
 
-## Setup
+### Getting started
 
-1. Copy `.env.example` to `.env`.
-2. Set `REACT_APP_API_URL` (backend URL) and all `REACT_APP_FIREBASE_*` from [Firebase Console](https://console.firebase.google.com).
-3. `npm install && npm start` → [http://localhost:3000](http://localhost:3000).
+```bash
+git clone https://github.com/sahelii/blog-frontend.git
+cd blog-frontend
+npm install
+```
 
-## Scripts
+Create a `.env` file:
 
-- **`npm start`** – Dev server
-- **`npm test`** – Jest + React Testing Library (use `--watchAll=false` in CI)
-- **`npm run build`** – Production build
-- **`npm run lint`** – ESLint
+```bash
+REACT_APP_API_URL=https://blog-backend-2-5hun.onrender.com
+REACT_APP_FIREBASE_API_KEY=your_firebase_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+REACT_APP_FIREBASE_PROJECT_ID=your-project-id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=...
+REACT_APP_FIREBASE_APP_ID=...
+REACT_APP_FIREBASE_MEASUREMENT_ID=...
+```
 
-## Tests
+Run locally:
 
-- **BlogList:** loading state and posts list (mocked `usePosts`)
-- **BlogDetail:** content and comments (mocked `usePost`, `useComments`)
-- **Login:** happy path and error state (mocked `authService`)
+```bash
+npm start        # http://localhost:3000
+```
 
-Run: `npm test -- --watchAll=false`
+Build for production:
 
-## CI
+```bash
+npm run build
+```
 
-- **Workflow:** `.github/workflows/ci.yml` runs on push/PR to `main` and `develop`.
-- **Steps:** `npm ci`, `npm run lint`, `npm test -- --watchAll=false`, `npm run build`.
+### Scripts
 
-So: *Every push runs tests and lint; no manual-only testing.*
+- **`npm start`** – run dev server
+- **`npm test`** – run unit tests
+- **`npm run build`** – production build
+- **`npm run lint`** – lint source files
 
-## Deployed links
+### Live demo
 
-- **Frontend:** https://blog-frontend-sigma-ecru.vercel.app/
-- **Backend:** https://blog-backend-2-5hun.onrender.com
+- **Frontend**: https://blog-frontend-sigma-ecru.vercel.app  
+- **Backend API**: https://blog-backend-2-5hun.onrender.com
 
-**Deployment checklist (Vercel):** In Vercel → Settings → Environment Variables, set `REACT_APP_API_URL` to your backend URL and all `REACT_APP_FIREBASE_*` from Firebase Console. Redeploy after changing env vars. Backend must have your Vercel URL in `CORS_ALLOWED_ORIGINS` (or `FRONTEND_URL`) so API calls succeed.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
