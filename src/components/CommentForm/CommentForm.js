@@ -10,26 +10,28 @@ const CommentForm = ({ postId, onCommentAdded }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!comment.trim()) {
+    if (!comment.trim() || loading) {
       return;
     }
 
+    const commentText = comment.trim();
+    setComment('');
     setLoading(true);
+    
     try {
-      await api.post(`/api/comments/${postId}/comment`, {
-        comment: comment.trim(),
-      });
-
-      const commentText = comment.trim();
-      setComment('');
-
-      // Call callback with comment text (as expected by BlogDetail's addComment)
+      // Only call the callback - useComments.addComment will handle the API call
       if (onCommentAdded) {
         await onCommentAdded(commentText);
+      } else {
+        // Fallback: if no callback, call API directly (shouldn't happen in normal flow)
+        await api.post(`/api/comments/${postId}/comment`, {
+          comment: commentText,
+        });
+        showToast('Comment added successfully', 'success');
       }
-
-      showToast('Comment added successfully', 'success');
     } catch (err) {
+      // Restore comment text on error
+      setComment(commentText);
       const errorMessage = err.response?.data?.error || err.message || 'Failed to add comment';
       showToast(errorMessage, 'error');
       console.error('Failed to add comment:', err);

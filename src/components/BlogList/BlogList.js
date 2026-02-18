@@ -10,7 +10,8 @@ import { FaClock, FaTag } from 'react-icons/fa';
 const BlogList = ({ searchTerm: propSearchTerm = '' }) => {
   const [page, setPage] = useState(1);
   const [selectedTag, setSelectedTag] = useState('');
-  const { posts, loading, error, pagination } = usePosts(page, 10);
+  // Use 12 items per page (multiple of 3) to fill rows properly in 3-column grid
+  const { posts, loading, error, pagination } = usePosts(page, 12);
 
   // Use prop search term if provided, otherwise use local state
   const searchTerm = propSearchTerm || '';
