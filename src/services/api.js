@@ -1,9 +1,13 @@
 import axios from 'axios';
 import { auth } from '../firebase';
 
+const isProduction = process.env.NODE_ENV === 'production' && process.env.REACT_APP_API_URL;
+// Render free tier cold start can take 30–60s so longer timeout in production
+const timeout = isProduction ? 30000 : 10000;
+
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000',
-  timeout: 10000,
+  timeout,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -55,9 +59,16 @@ api.interceptors.response.use(
       }
     }
 
-    // Handle network errors
+    // Handle network errors (often Render cold start: backend waking up)
     if (!error.response) {
-      error.message = 'Network error. Please check your internet connection.';
+      const isGet = originalRequest.method?.toUpperCase() === 'GET';
+      const isRetry = originalRequest._coldStartRetry;
+      if (isGet && !isRetry) {
+        originalRequest._coldStartRetry = true;
+        await new Promise((r) => setTimeout(r, 4000));
+        return api(originalRequest);
+      }
+      error.message = 'The server is starting up. Please wait a moment and try again.';
     }
 
     return Promise.reject(error);
