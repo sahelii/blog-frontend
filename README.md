@@ -1,29 +1,52 @@
-# Getting Started with Create React App
+# StoryHub Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React SPA for the blog platform: posts, comments, auth (Firebase), React Query, React Router.
 
-## Available Scripts
+## Tech stack
 
-In the project directory, you can run:
+- React 18, React Router, React Query
+- Firebase Auth
+- Axios (API client with `x-auth-token`)
 
-### `npm start`
+## Security (never commit)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Do not commit:** `.env`, `.env.local`, `.env.vault`, `.env.keys`, or any file with real API keys or secrets. They are in `.gitignore`.
+- Use `.env.example` as a template only; never commit it with real values.
 
-## `Deployed link frontend`
-https://blog-frontend-sigma-ecru.vercel.app/
-## `Deployed link backend`
-https://blog-backend-2-5hun.onrender.com
+## Setup
 
+1. Copy `.env.example` to `.env`.
+2. Set `REACT_APP_API_URL` (backend URL) and all `REACT_APP_FIREBASE_*` from [Firebase Console](https://console.firebase.google.com).
+3. `npm install && npm start` → [http://localhost:3000](http://localhost:3000).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Scripts
 
-### `npm test`
+- **`npm start`** – Dev server
+- **`npm test`** – Jest + React Testing Library (use `--watchAll=false` in CI)
+- **`npm run build`** – Production build
+- **`npm run lint`** – ESLint
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tests
+
+- **BlogList:** loading state and posts list (mocked `usePosts`)
+- **BlogDetail:** content and comments (mocked `usePost`, `useComments`)
+- **Login:** happy path and error state (mocked `authService`)
+
+Run: `npm test -- --watchAll=false`
+
+## CI
+
+- **Workflow:** `.github/workflows/ci.yml` runs on push/PR to `main` and `develop`.
+- **Steps:** `npm ci`, `npm run lint`, `npm test -- --watchAll=false`, `npm run build`.
+
+So: *Every push runs tests and lint; no manual-only testing.*
+
+## Deployed links
+
+- **Frontend:** https://blog-frontend-sigma-ecru.vercel.app/
+- **Backend:** https://blog-backend-2-5hun.onrender.com
+
+**Deployment checklist (Vercel):** In Vercel → Settings → Environment Variables, set `REACT_APP_API_URL` to your backend URL and all `REACT_APP_FIREBASE_*` from Firebase Console. Redeploy after changing env vars. Backend must have your Vercel URL in `CORS_ALLOWED_ORIGINS` (or `FRONTEND_URL`) so API calls succeed.
 
 ### `npm run build`
 

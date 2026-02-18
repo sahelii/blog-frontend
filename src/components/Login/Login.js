@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom'; 
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login, signUp } from '../../authService';
-import { auth } from "../../firebase";
-import { deleteUser, sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from '../../firebase';
+import { deleteUser } from 'firebase/auth';
 import { endpoint } from '../../config';
 import axios from 'axios';
 import { FaEnvelope, FaLock, FaUser, FaSpinner, FaEye, FaEyeSlash } from 'react-icons/fa';
 import './Login.css';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -24,8 +22,6 @@ const Login = () => {
   const [resetLoading, setResetLoading] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState('');
   const navigate = useNavigate();
-  const location = useLocation();
-  
   const saveTokenToLocalStorage = (token) => {
     localStorage.setItem('token', token);
   };
@@ -40,7 +36,7 @@ const Login = () => {
         return [true, res.data];
       }
     } catch (err) {
-      console.log(err);
+      console.error('Registration failed:', err);
       return [false, undefined];
     }
   };
@@ -66,11 +62,11 @@ const Login = () => {
         const firebase_token = await auth.currentUser.getIdToken();
         saveTokenToLocalStorage(firebase_token);
       } else {
-        const login_obj = await login(email, password);
+        await login(email, password);
         const firebase_token = await auth.currentUser.getIdToken();
         saveTokenToLocalStorage(firebase_token);
       }
-      navigate('/');  
+      navigate('/');
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         setError('Email already in use. Please log in.');
@@ -81,7 +77,7 @@ const Login = () => {
       } else if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
         setError('Invalid email or password.');
       } else {
-        setError('Authentication error: ' + error.message);
+        setError(`Authentication error: ${error.message}`);
       }
     } finally {
       setLoading(false);

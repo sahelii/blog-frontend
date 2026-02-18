@@ -1,36 +1,40 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { auth } from '../../firebase';
-import { endpoint } from '../../config';
-import "./CommentForm.css";
+import api from '../../services/api';
+import { useToast } from '../../context/ToastContext';
+import './CommentForm.css';
 
 const CommentForm = ({ postId, onCommentAdded }) => {
   const [comment, setComment] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { showToast } = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = auth.currentUser;
-    if (user) {
-      try {
-        const token = await user.getIdToken();
-        const config = {
-          headers: {
-            'x-auth-token': token,
-          },
-        };
+    if (!comment.trim()) {
+      return;
+    }
 
-        const res = await axios.post(
-          `${endpoint}/api/comments/${postId}/comment`, 
-          {
-            comment: comment,  
-          },
-          config
-        );
-        setComment('');
-        onCommentAdded(res.data);  
-      } catch (err) {
-        console.error('Failed to add comment:', err);
+    setLoading(true);
+    try {
+      await api.post(`/api/comments/${postId}/comment`, {
+        comment: comment.trim(),
+      });
+
+      const commentText = comment.trim();
+      setComment('');
+
+      // Call callback with comment text (as expected by BlogDetail's addComment)
+      if (onCommentAdded) {
+        await onCommentAdded(commentText);
       }
+
+      showToast('Comment added successfully', 'success');
+    } catch (err) {
+      const errorMessage = err.response?.data?.error || err.message || 'Failed to add comment';
+      showToast(errorMessage, 'error');
+      console.error('Failed to add comment:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -42,8 +46,11 @@ const CommentForm = ({ postId, onCommentAdded }) => {
         onChange={(e) => setComment(e.target.value)}
         placeholder="Add a comment..."
         required
+        disabled={loading}
       />
-      <button className="submit-button" type="submit">Submit</button>
+      <button className="submit-button" type="submit" disabled={loading}>
+        {loading ? 'Submitting...' : 'Submit'}
+      </button>
     </form>
   );
 };

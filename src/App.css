@@ -1,0 +1,21 @@
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  transition: all var(--transition-base);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content {
+    padding: 1rem;
+  }
+}
