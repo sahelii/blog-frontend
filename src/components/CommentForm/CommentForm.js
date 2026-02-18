@@ -17,7 +17,7 @@ const CommentForm = ({ postId, onCommentAdded }) => {
     const commentText = comment.trim();
     setComment('');
     setLoading(true);
-    
+
     try {
       // Only call the callback - useComments.addComment will handle the API call
       if (onCommentAdded) {
