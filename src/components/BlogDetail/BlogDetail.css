@@ -168,10 +168,16 @@
   border-radius: 1rem;
   margin-bottom: 2rem;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .blog-content p {
   margin-bottom: 1rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .comments-section {
